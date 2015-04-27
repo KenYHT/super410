@@ -1,0 +1,20 @@
+{
+  "name": "super410",
+  "version": "0.0.0",
+  "homepage": "https://github.com/kenyht/super410",
+  "authors": [
+    "EngrishMajor <ken.yht@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "foundation": "~5.5.1",
+    "jquery": "~2.1.3"
+  }
+}

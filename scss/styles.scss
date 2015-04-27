@@ -1,0 +1,19 @@
+@import "compass";
+@import "compass/reset";
+
+@import "variables";
+@import "mixins";
+@import "base";
+
+.user-item, .task-item {
+	clear: both;
+}
+
+#user-title, #user-desc, #task-title, #task-desc {
+	display: inline;
+}
+
+ul {
+	margin: 0 !important;
+	border-bottom: 1px #F5F5F5 solid;
+}
