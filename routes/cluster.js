@@ -18,3 +18,13 @@ client.ping({
   }
 });
 
+exports.query = function(req, res) {
+	var query = req.body.query;
+	client.search(query)
+			.then(function(body) {
+				res.status(200).json({ message: "OK.", data: body });
+			}, function(error) {
+				console.trace(error.message);
+				res.status(500).json({ message: "Error.", data: error });
+			});
+}
