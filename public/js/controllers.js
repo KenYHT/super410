@@ -4,7 +4,20 @@ papertrail.controller('SearchController', ['$scope', '$http', '$location', funct
 	$scope.searchForm = {
 		query: "",
 		classifier: "body_bm25",
-		limit: 10
+		limit: 50
+	};
+
+	$scope.showFullForm = false;
+	$scope.formToggleLink = "more options";
+
+	$scope.toggleForm = function() {
+		if ($scope.showFullForm === false) {
+			$scope.formToggleLink = "collapse";
+		} else {
+			$scope.formToggleLink = "more options"
+		}
+		
+		$scope.showFullForm = !$scope.showFullForm;
 	};
 
 	$scope.query = function() {

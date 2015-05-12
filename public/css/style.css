@@ -1,8 +1,21 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-image: url("/../img/uber_grid.png");
+  background-attachment: fixed;
+  background-color: transparent;
+  background-size: 100% 100%;
 }
 
 a {
   color: #00B7FF;
+}
+
+h1, #title-desc {
+	color: #DB6C0B;
+  float: left;
+}
+
+#title-desc {
+  margin-top: 39px;
 }
