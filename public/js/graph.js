@@ -1,11 +1,9 @@
 var width = 960,
   height = 500;
 
-var color = d3.scale.category20();
-
 var force = d3.layout.force()
-  .charge(-120)
-  .linkDistance(30)
+  .charge(-160)
+  .linkDistance(40)
   .size([width, height]);
 
 var svg = d3.select("body").append("svg")
@@ -39,16 +37,11 @@ d3.json('./js/miserables.json', function (error, graph) {
     .data(graph.nodes)
     .enter().append("circle")
     .attr("class", "node")
-    .attr("r", 5)
+    .attr("r", 7)
     .style("fill", function (d) {
-      return color(d.group); // TODO: don't color based off of groups at first, have default plain color?
+      return d3.rgb("#add8e6");
     })
     .call(force.drag);
-
-  node.append("title")
-    .text(function (d) {
-      return d.name;
-    });
 
   force.on("tick", function () {
     link.attr("x1", function (d) {
