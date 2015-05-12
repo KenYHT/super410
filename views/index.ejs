@@ -11,6 +11,7 @@
     <div ng-controller="SearchController">
       <div class="row">
         <h1>PaperTrail</h1>
+        <p id="title-desc">A graph search for research papers.</p>
       </div>
       <form ng-model="searchForm">
         <div class="row">
@@ -25,9 +26,28 @@
             </div>
           </div>
         </div>
+        <div id="additional-inputs" ng-show="showFullForm">
+          <div class="row">
+            <div class="small-6 columns">
+              <label>Document Limit:
+                <input id="document-limit" type="text" value="{{ searchForm.limit }}"/>
+              </label>
+            </div>
+            <div class="small-6 columns">
+              <label>Classifier:
+                <select ng-model="searchForm.classifier" ng-init="searchForm.classifier='text'">
+                  <option value="text">Text</option>
+                  <option value="bm_25">BM25</option>
+                  <option value="lmd">LMD</option>
+                </select>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <a id="full-form-toggle" ng-click="toggleForm()">{{ formToggleLink }}</a>
+        </div>
       </form>
-
-      {{ searchForm.query }}
     </div>
 
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
