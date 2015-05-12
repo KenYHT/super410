@@ -1,6 +1,6 @@
 papertrail.config(function($routeProvider){
   $routeProvider
-  .when('/', {
+  .when('/graph', {
     templateUrl: './partials/_graph.html',
     controller: 'SearchController'
   })

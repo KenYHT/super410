@@ -6,5 +6,7 @@ module.exports = function(app, router) {
 		res.render('index');
 	});
 
-
+	// get request to make a query to the cluster
+	var queryRoute = router.route('/query');
+	queryRoute.post(cluster.query);
 };
