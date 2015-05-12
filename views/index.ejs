@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="papertrail">
   <head>
     <meta charset="UTF-8">
     <title>PaperTrail</title>
@@ -8,7 +8,28 @@
     <link rel="stylesheet" href="./css/style.css">
   </head>
   <body>
-    <p>hello world</p>
+    <div ng-controller="SearchController">
+      <div class="row">
+        <h1>PaperTrail</h1>
+      </div>
+      <form ng-model="searchForm">
+        <div class="row">
+          <div class="large-12 columns">
+            <div class="row collapse">
+              <div class="small-10 columns">
+                <input type="text" placeholder="Search query" ng-model="searchForm.query">
+              </div>
+              <div class="small-2 columns">
+                <a href="#" class="button postfix" ng-click="query()">Go</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      {{ searchForm.query }}
+    </div>
+
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <script src="./vendors/jquery/dist/jquery.min.js"></script>
     <script src="./vendors/foundation/js/foundation.min.js"></script>
