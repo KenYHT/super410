@@ -1,21 +1,14 @@
-var width = window.innerWidth, // TODO: figure out a way to center this?
-  height = window.innerHeight;
-var usingSimilarityColoring = false;
-var DEFAULT_COLOR = "#add8e6";
-
+var width = 960,
+  height = 500;
 
 var force = d3.layout.force()
-  .linkStrength(0.1)
-  .friction(0.9)
-  .linkDistance(30)
-  .charge(-120)
+  .charge(-200)
+  .linkDistance(100)
   .size([width, height]);
 
-var svg = d3.select("body")
-  .append("svg")
+var svg = d3.select("body").append("svg")
   .attr("width", width)
-  .attr("height", height)
-
+  .attr("height", height);
 
 var tip = d3.tip() // todo: uhhhhhh?
   .attr('class', 'd3-tip')
@@ -30,26 +23,32 @@ d3.json('./js/miserables.json', function (error, graph) {
   force
     .nodes(graph.nodes)
     .links(graph.links)
-    .friction(0.9)
     .start();
 
   var link = svg.selectAll(".link")
     .data(graph.links)
     .enter().append("line")
     .attr("class", "link")
-    .style("stroke-width", function (d) {
-      return Math.sqrt(d.value);
-    });
+    .attr("marker-end", "url(#arrowhead)")
+    .style("stroke-width", 2);
 
   var node = svg.selectAll(".node")
     .data(graph.nodes)
     .enter().append("circle")
     .attr("class", "node")
-    .attr("r", 7)
+    .attr("r", 5)
     .style("fill", function (d) {
-      return d3.rgb(DEFAULT_COLOR);
+      return d3.rgb("#add8e6");
     })
     .call(force.drag);
+
+svg.append("defs").append("marker")
+    .attr("id", "arrowhead")
+    .attr("markerWidth", 6)
+    .attr("markerHeight", 14)
+    .attr("orient", "auto")
+    .append("path")
+        .attr("d", "M 0,0 V 4 L6,2 Z"); //this is actual shape for arrowhead
 
   force.on("tick", function () {
     link.attr("x1", function (d) {
@@ -75,27 +74,8 @@ d3.json('./js/miserables.json', function (error, graph) {
 
   node.on("click", function (d) {
     console.log(d.name);
-    console.log(d);
-    tip.show();
-    /* var source = getPaperObject(this); // TODO: implement this (selectAll returns an array? a selection?)
-     svg.selectAll(".node").style("fill", function (vertex) {
-       return d3.rgb(0, parseInt(paperSimilarity(getPaperObject(vertex))), 0); // TODO: how to get all individual papers?
-     });*/
+    // TODO: change the color of other vertices based on similarity
   });
-});
 
-/**
- * source and target both objects of the form
- * {
- *   title: theTitle (string),
- *   authors: [author1, author2, ...] (array of strings),
- *   abstract: theAbstract (string)
- * }
- */
-function paperSimilarity(source, target) {
-  return (
-    bm25(source.title, source.title) +
-    bm25(source.authors, target.authors) +
-    bm25(source.abstract, target.abstract) // TODO: grab this from the dice coefficient package
-  ) / 3.0;
-}
+
+});
