@@ -9,4 +9,7 @@ module.exports = function(app, router) {
 	// get request to make a query to the cluster
 	var queryRoute = router.route('/query');
 	queryRoute.post(cluster.query);
+
+	// var JSONRoute = router.route('/JSON');
+	// JSONRoute.post(cluster.saveJSON);
 };

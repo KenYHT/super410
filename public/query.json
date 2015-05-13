@@ -1,0 +1,298 @@
+{
+    "nodes": [
+        {
+            "_index": "phys",
+            "_type": "doc",
+            "_id": "9801001",
+            "_score": 1,
+            "_source": {
+                "cite_out": [
+                    "0303058",
+                    "9903185"
+                ],
+                "text": "  The motion of a one-dimensional kink and its energy losses are considered as a model of interaction of nontrivial topological field configurations with external fields. The approach is based on the calculation of the zero modes excitation probability in the external field. We study in the same way the interaction of the t'Hooft-Polyakov monopole with weak external fields. The basic idea is to treat the excitation of a monopole zero mode as the monopole displacement. The excitation is found perturbatively. As an example we consider the interaction of the t'Hooft-Polyakov monopole with an external uniform magnetic field. ",
+                "author_list": [
+                    "V.G. Kiselev (Institute of Medicine",
+                    " Research Centre Juelich",
+                    " Germany)"
+                ],
+                "cite_in": [
+                    "9605038"
+                ],
+                "title": " Forced Topological Nontrivial Field Configurations "
+            }
+        },
+        {
+            "_index": "phys",
+            "_type": "doc",
+            "_id": "9801002",
+            "_score": 1,
+            "_source": {
+                "cite_out": [
+                    "9802067",
+                    "9801134",
+                    "9807082",
+                    "9907086",
+                    "9803033",
+                    "9803186",
+                    "9801017",
+                    "9801020",
+                    "9805158",
+                    "9806177",
+                    "0005052",
+                    "9902118",
+                    "0007024",
+                    "9907074",
+                    "9812072",
+                    "9801207",
+                    "9803197",
+                    "9805029",
+                    "0107151",
+                    "9801060",
+                    "9806092",
+                    "9802004",
+                    "9802151"
+                ],
+                "text": "  Using a six-orientifold on top of a NS-fivebrane we construct a chiral N=1 supersymmetric gauge theory in four dimensions with gauge group SU(N_c) and matter in the symmetric, antisymmetric and (anti)fundamental representations. Anomaly cancellation is fulfilled by the requirement of a smooth RR 7-form charge distribution and leads us to the introduction of 8 half D-sixbranes ending on the NS-fivebrane. We obtain the dual model from branes by a linking number argument. We check explicitly the 't Hooft anomaly matching conditions and the map between deformations in the original and the dual model. ",
+                "author_list": [
+                    "Karl L",
+                    "steiner",
+                    " Esperanza Lopez ",
+                    " David A. Lowe"
+                ],
+                "cite_in": [
+                    "9411149",
+                    "9506148",
+                    "9510017",
+                    "9512059",
+                    "9512062",
+                    "9606017",
+                    "9607163",
+                    "9611050",
+                    "9611230",
+                    "9702014",
+                    "9703051",
+                    "9703166",
+                    "9703210",
+                    "9704104",
+                    "9705199",
+                    "9705232",
+                    "9706047",
+                    "9706082",
+                    "9707027",
+                    "9708082",
+                    "9708118",
+                    "9708127",
+                    "9708134",
+                    "9709096",
+                    "9712005",
+                    "9712028",
+                    "9712149",
+                    "9712172",
+                    "9712193"
+                ],
+                "title": " Duality of Chiral N=1 Supersymmetric Gauge Theories via Branes "
+            }
+        },
+        {
+            "_index": "phys",
+            "_type": "doc",
+            "_id": "9801003",
+            "_score": 1,
+            "_source": {
+                "cite_out": [
+                    "0111209"
+                ],
+                "text": "  We review some recent results on the effective interactions of a light gravitino with ordinary particles. In particular, we discuss on a simple example a novel aspect of the low-energy theorems for broken supersymmetry: in the effective lagrangian describing the goldstino couplings to matter, there are terms bilinear in the goldstino that, already at the lowest non-trivial order, are not entirely controlled by the supersymmetry-breaking scale, and introduce additional free parameters. We conclude by mentioning some phenomenological implications, including a lower bound on the gravitino mass from collider data. ",
+                "author_list": [
+                    "Fabio Zwirner (INFN",
+                    "Padua)"
+                ],
+                "cite_in": [
+                    "9709111"
+                ],
+                "title": " Effective interactions of a light gravitino "
+            }
+        },
+        {
+            "_index": "phys",
+            "_type": "doc",
+            "_id": "9801004",
+            "_score": 1,
+            "_source": {
+                "cite_out": [
+                    "9904055",
+                    "9801005",
+                    "9807037"
+                ],
+                "text": "  Through more detailed calculations on QED$_{1+1}$ and QED$_{3+1}$ emplying a new treatment of Feynman Amplitudes, we attribute the regularization independent and hence definite origin of chiral anomaly in perturbation theory to an unambiguous term which is a rational function in momentum space. Some relevant remarks are presented. ",
+                "author_list": [
+                    "Jifeng Yang ",
+                    " Guang-jiong Ni"
+                ],
+                "cite_in": [
+                    "9210026",
+                    "9611133",
+                    "9708104"
+                ],
+                "title": " Chiral anomaly and unambiguous rational terms "
+            }
+        },
+        {
+            "_index": "phys",
+            "_type": "doc",
+            "_id": "9801005",
+            "_score": 1,
+            "_source": {
+                "cite_out": [
+                    "9807037",
+                    "9808047"
+                ],
+                "text": "  This is a further explanation of a new and simple renormalization approach recently proposed by the author (hep-th/9708104, Ref. [1], that is somewhat sketchy) for any ordinary QFT (whether renormalizable or not) in any spacetime dimension. We discussed the physical motivations of the new approach and its efficiency when compared to the existent renormalization approaches. Some other important issues related are briefly touched. ",
+                "author_list": [],
+                "cite_in": [
+                    "9510087",
+                    "9607201",
+                    "9705216",
+                    "9708104",
+                    "9709212",
+                    "9801004"
+                ],
+                "title": " Quantum field theory can be UV finite if it is taken as effective one "
+            }
+        },
+        {
+            "_index": "phys",
+            "_type": "doc",
+            "_id": "9801006",
+            "_score": 1,
+            "_source": {
+                "cite_out": [],
+                "text": "  The interconnection between quantum mechanics and probabilistic classical mechanics for a free relativistic particle is derived in terms of Wigner functions (WF) for both Dirac and Klein-Gordon (K-G) equations. Construction of WF is achieved by first defining a bilocal 4-current and then taking its Fourier transform w.r.t. the relative 4-coordinate. The K-G and Proca cases also lend themselves to a closely parallel treatment provided the Kemmer- Duffin beta-matrix formalism is employed for the former. Calculation of WF is carried out in a Lorentz-covariant fashion by standard `trace' techniques. The results are compared with a recent derivation due to Bosanac. ",
+                "author_list": [
+                    ". N. Mitra ",
+                    " R. Ramanathan"
+                ],
+                "cite_in": [],
+                "title": " On Simulating Liouvillian Flow From Quantum Mechanics Via Wigner   Functions "
+            }
+        },
+        {
+            "_index": "phys",
+            "_type": "doc",
+            "_id": "9801007",
+            "_score": 1,
+            "_source": {
+                "cite_out": [
+                    "9803107",
+                    "9907225",
+                    "9802092"
+                ],
+                "text": "  Some formal aspects of supersymmetry breaking are reviewed. The classic \"requirements\" for supersymmetry breaking include chiral matter, a dynamical superpotential, and a classical superpotential which completely lifts the moduli space. These \"requirements\" may be evaded in theories with large matter representations. The mechanisms of supersymmetry breaking by confinement and quantum deformation of the moduli space are explained, with emphasis on the importance of identifying the relevant degrees of freedom in the ground state. Supersymmetry breaking and the behavior of the Witten index in non-chiral theories are discussed. The quantum removal of directions which are classically unlifted is also illustrated. Examples of product gauge group theories that admit dual descriptions of the non-supersymmetric ground state are also presented. ",
+                "author_list": [],
+                "cite_in": [
+                    "9402044",
+                    "9411149",
+                    "9506098",
+                    "9509066",
+                    "9602180",
+                    "9603158",
+                    "9608046"
+                ],
+                "title": " Recent Developments in Dynamical Supersymmetry Breaking "
+            }
+        },
+        {
+            "_index": "phys",
+            "_type": "doc",
+            "_id": "9801008",
+            "_score": 1,
+            "_source": {
+                "cite_out": [
+                    "9805207",
+                    "9811051",
+                    "9910106"
+                ],
+                "text": "  A string cosmology scenario (\"pre-big-bang\") postulates that the evolution of the Universe starts from a state of very small curvature and coupling, undergoes a long phase of dilaton-driven kinetic inflation and at some later time joins smoothly standard radiation dominated cosmological evolution, thus giving rise to a singularity free inflationary cosmology. I report on recent progress in understanding some outstanding issues such as initial conditions, graceful exit transition and generation of inhomogeneity perturbations. ",
+                "author_list": [
+                    "Ram Brustein"
+                ],
+                "cite_in": [
+                    "9211021",
+                    "9501066",
+                    "9504083",
+                    "9506027",
+                    "9507017",
+                    "9604084",
+                    "9604159",
+                    "9607146",
+                    "9608041",
+                    "9611039",
+                    "9701082",
+                    "9702043",
+                    "9703150",
+                    "9705035",
+                    "9705050",
+                    "9706221",
+                    "9708046",
+                    "9709022",
+                    "9710188"
+                ],
+                "title": " String Cosmology: An Update "
+            }
+        },
+        {
+            "_index": "phys",
+            "_type": "doc",
+            "_id": "9801009",
+            "_score": 1,
+            "_source": {
+                "cite_out": [
+                    "9908007",
+                    "9909087"
+                ],
+                "text": "  Using the conformal compensator superfields of N=2 D=4 supergravity, the Type IIB S-duality transformations are expressed as a linear rotation which mixes the compensator and matter superfields. The classical superspace action for D=4 compactifications of Type IIB supergravity is manifestly invariant under this transformation. Furthermore, the introduction of conformal compensators allows a Fradkin-Tseytlin term to be added to the manifestly SL(2,Z)-covariant sigma model action of Townsend and Cederwall. ",
+                "author_list": [],
+                "cite_in": [
+                    "9201004",
+                    "9303025",
+                    "9404162",
+                    "9508143",
+                    "9510106",
+                    "9510135",
+                    "9608078",
+                    "9608111",
+                    "9705160",
+                    "9709002"
+                ],
+                "title": " Conformal Compensators and Manifest Type IIB S-Duality "
+            }
+        },
+        {
+            "_index": "phys",
+            "_type": "doc",
+            "_id": "9801010",
+            "_score": 1,
+            "_source": {
+                "cite_out": [
+                    "0007194",
+                    "9912078"
+                ],
+                "text": "  We construct topological recursion relations (TRR's) at higher genera $g\\ge2$ for general 2-dimensional topological field theories coupled to gravity. These TRR's when combined with Virasoro conditions enable one to determine the number of higher genus holomorphic curves in any Fano varieties. In the case of $CP^2$ we reproduce the known results at genus $g=2$. ",
+                "author_list": [
+                    "Tohru Eguchi ",
+                    " Chuan-Sheng Xiong"
+                ],
+                "cite_in": [
+                    "9201001",
+                    "9405106",
+                    "9407134",
+                    "9503017",
+                    "9703086"
+                ],
+                "title": " Quantum Cohomology at Higher Genus: Topological Recursion Relations and   Virasoro Conditions "
+            }
+        }
+    ],
+    "links": []
+}
