@@ -6,21 +6,8 @@ papertrail.controller('SearchController', ['$scope', '$http', '$location', funct
 
   $scope.searchForm = {
     query: "",
-    classifier: "body_bm25",
+    classifier: "text",
     limit: 50
-  };
-
-  $scope.showFullForm = false;
-  $scope.formToggleLink = "more options";
-
-  $scope.toggleForm = function () {
-    if ($scope.showFullForm === false) {
-      $scope.formToggleLink = "collapse";
-    } else {
-      $scope.formToggleLink = "more options";
-    }
-
-    $scope.showFullForm = !$scope.showFullForm;
   };
 
 	// also constructs the graph
@@ -73,18 +60,40 @@ papertrail.controller('SearchController', ['$scope', '$http', '$location', funct
     return cleaned;
   }
 
-  function constructQuery(queryForm) {
-    //guessing queryForm is the query they want
-    //and we make a object in the format for the
-    //btw this only does bm25 queries
-    var constructedQuery = {
-      "query": {
-        "match": {
-          //queryForm.classifier: queryForm.query
-          "body_bm25": queryForm.query
+  function constructQuery(searchForm) {
+    var constructedQuery = {};
+
+    switch (searchForm.classifier) {
+      case "bm25": 
+        constructedQuery = {
+          "query": {
+            "match": {
+              "body_bm25": searchForm.query
+            }
+          }
+        };
+        break;
+
+      case "lmd":
+        constructedQuery = {
+          "query": {
+            "match": {
+              "body_lmd": searchForm.query
+            }
+          }
         }
-      }
-    };
+        break;
+
+      default:
+        constructedQuery = {
+          "query": {
+            "match": {
+              "text": searchForm.query
+            }
+          }
+        }
+    }
+    
     return constructedQuery;
   }
 }]);

@@ -1,5 +1,4 @@
 body {
-  padding-top: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-image: url("/../img/uber_grid.png");
   background-attachment: fixed;
@@ -11,12 +10,21 @@ a {
   color: #00B7FF;
 }
 
+.d3-tip {
+  width: 600px;
+}
+
+.d3-tip p {
+  font-size: 10px;
+}
+
 h1, #title-desc {
 	color: #DB6C0B;
   float: left;
 }
 
 #form-container {
+  margin: 50px auto;
   position: absolute;
 }
 

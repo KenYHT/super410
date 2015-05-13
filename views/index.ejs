@@ -26,13 +26,8 @@
             </div>
           </div>
         </div>
-        <div id="additional-inputs" ng-show="showFullForm">
+        <div id="additional-inputs">
           <div class="row">
-            <div class="small-6 columns">
-              <label>Document Limit:
-                <input id="document-limit" type="text" value="{{ searchForm.limit }}"/>
-              </label>
-            </div>
             <div class="small-6 columns">
               <label>Classifier:
                 <select ng-model="searchForm.classifier" ng-init="searchForm.classifier='text'">
@@ -43,9 +38,6 @@
               </label>
             </div>
           </div>
-        </div>
-        <div class="row">
-          <a id="full-form-toggle" ng-click="toggleForm()">{{ formToggleLink }}</a>
         </div>
       </form>
     </div>
