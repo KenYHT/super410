@@ -36,7 +36,7 @@ function drawGraph(graph) {
     .data(graph.nodes)
     .enter().append("circle")
     .attr("class", "node")
-    .attr("r", 5)
+    .attr("r", 6)
     .style("fill", function (d) {
       return d3.rgb("#add8e6");
     })
@@ -77,11 +77,10 @@ function drawGraph(graph) {
   });
 
   node.on("click", function (d) {
-    // TODO: change color of other vertices based on similarity
     // TODO: change color of edges based on citing in/citing out
     // TODO: add other vertices/edges to the graph that cited it/were cited by it
     svg.selectAll(".node").style('fill', function (curr) {
-        return d3.rgb(randIntBetween(0, 255), randIntBetween(0, 255), randIntBetween(0, 255));
+        return getColorFromSimilarity(d, curr);
     });
   });
 
@@ -89,6 +88,9 @@ function drawGraph(graph) {
   node.on("mouseout", tip.hide);
 }
 
-function randIntBetween(lower, upper) {
-  return Math.floor(Math.random() * upper) + lower;
+function getColorFromSimilarity(source, target) {
+  var titleSimilarity = compare(source.title, target.title);
+  var abstractSimilarity = compare(source.text, target.text);
+  var similarity = (titleSimilarity + abstractSimilarity) / 2.0;
+  return d3.hsl(120*similarity, 1, 0.5);
 }
