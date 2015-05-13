@@ -76,33 +76,9 @@ exports.query = function(req, res) {
             res.status(200).json({ message: "OK.", data: graphJSON });
           }
         });
-
-	 			// write to json file
-	 			// setTimeout(function() {
-	 			// 	fs.writeFile('./public/query.json', JSON.stringify(graphJSON, null, 4), function(error) {
-	 			// 		if (error) {
-	 			// 			res.status(500).json({ message: "Error.", data: error });
-	 			// 		} else {
-     //          console.log("wrote to file")
-	 			// 			res.status(200).json({ message: "OK.", data: {} });
-	 			// 		}
-	 			// 	})
-	 			// }, 1);
 	 		});
 	 			
 }
-
-// exports.saveJSON = function(req, res) {
-// 	fs.writeFile('./public/query.json', JSON.stringify(req.body, null, 4), 
-// 			function(err) {
-// 				if (err) {
-// 					res.status(500).json({ message: "Error.", data: error });
-// 				} else {
-// 					console.log("wrote to JSON file");
-// 					res.status(200).json({ message: "OK.", data: {} });
-// 				}
-// 			});
-// }
 
 function bulkCitations(citations, direction, currResultIndex) {
 		var bulkUrl = clusterUrl + '/phys/doc/_mget';
@@ -124,18 +100,32 @@ function bulkCitations(citations, direction, currResultIndex) {
 
 function constructEdges(bulkResults, direction, currResultIndex) {
 	for (var i = 0; i < bulkResults.length; i++) {
-		graphJSON["nodes"].push(bulkResults[i]);
+    var occurenceList = graphJSON.nodes.map(function(node) {
+      return node._id === bulkResults[i]._id;
+    });
 
-		var link = {};
+    var existingNodeIndex = occurenceList.indexOf(true);
+    var link = {};
 
-		if (direction === "incoming") {
-			link["source"] = graphJSON["nodes"].length;
-			link["target"] = currResultIndex;
-		} else {
-			link["source"] = currResultIndex;
-			link["target"] = graphJSON["nodes"].length;
-		}
-
+    if (existingNodeIndex === -1) {
+		  graphJSON["nodes"].push(bulkResults[i]);
+      if (direction === "incoming") {
+        link.source = graphJSON["nodes"].length;
+        link.target = currResultIndex;
+      } else {
+        link.source = currResultIndex;
+        link.target = graphJSON["nodes"].length;
+      }
+    } else {
+      if (direction === "incoming") {
+        link.source = existingNodeIndex;
+        link.target = currResultIndex;
+      } else {
+        link.source = currResultIndex;
+        link.target = existingNodeIndex;
+      }
+    }
+		
 		graphJSON["links"].push(link);
 	}
 }

@@ -16,6 +16,10 @@ h1, #title-desc {
   float: left;
 }
 
+#form-container {
+  position: absolute;
+}
+
 #title-desc {
   margin-top: 39px;
 }
