@@ -23,19 +23,20 @@ papertrail.controller('SearchController', ['$scope', '$http', '$location', funct
     $scope.showFullForm = !$scope.showFullForm;
   };
 
-  // also constructs the graph
-  $scope.query = function () {
-    // make api call to query and get the results
-    var queryObject = constructQuery($scope.searchForm);
-    $http.post('/api/query', queryObject)
-      .success(function (res) {
-        graph = extractGraph(res.data);
-        drawGraph(graph);
-      })
-      .error(function (err) {
-        console.log(err);
-      });
-  };
+	// also constructs the graph
+	$scope.query = function() {
+		// make api call to query and get the results
+		var queryObject = constructQuery($scope.searchForm);
+		$http.post('/api/query', queryObject)
+		 		.success(function(res) {
+          graph = extractGraph(res.data)
+          console.log(res);
+          drawGraph(graph);
+		 		})
+		 		.error(function(err) {
+		 			console.log(err);
+		 		});
+	};
 
   function extractGraph(data) {
     var rawNodes = data.nodes;
