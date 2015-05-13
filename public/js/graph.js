@@ -1,25 +1,25 @@
-var width = window.innerWidth,
-  height = window.innerHeight;
+function drawGraph(graph) {
+  console.log (graph);
+  var width = window.innerWidth;
+  var height = window.innerHeight;
+  var force = d3.layout.force()
+    .charge(-300)
+    .linkDistance(100)
+    .size([width, height]);
 
-var force = d3.layout.force()
-  .charge(-300)
-  .linkDistance(100)
-  .size([width, height]);
+  var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
 
-var svg = d3.select("body").append("svg")
-  .attr("width", width)
-  .attr("height", height);
+  var tip = d3.tip() // todo: uhhhhhh?
+    .attr('class', 'd3-tip')
+    .offset([-10, 0])
+    .html(function (d) {
+      return "abstract and title goes here";
+    });
 
-var tip = d3.tip() // todo: uhhhhhh?
-  .attr('class', 'd3-tip')
-  .offset([-10, 0])
-  .html(function (d) {
-    return "abstract and title goes here";
-  });
+  svg.call(tip);
 
-svg.call(tip);
-
-d3.json('./js/miserables.json', function (error, graph) {
   force
     .nodes(graph.nodes)
     .links(graph.links)
@@ -42,13 +42,13 @@ d3.json('./js/miserables.json', function (error, graph) {
     })
     .call(force.drag);
 
-svg.append("defs").append("marker")
+  svg.append("defs").append("marker")
     .attr("id", "arrowhead")
     .attr("markerWidth", 6)
     .attr("markerHeight", 14)
     .attr("orient", "auto")
     .append("path")
-        .attr("d", "M 0,0 V 4 L6,2 Z"); //this is actual shape for arrowhead
+    .attr("d", "M 0,0 V 4 L6,2 Z"); //this is actual shape for arrowhead
 
   force.on("tick", function () {
     link.attr("x1", function (d) {
@@ -76,6 +76,4 @@ svg.append("defs").append("marker")
     console.log(d.name);
     // TODO: change the color of other vertices based on similarity
   });
-
-
-});
+}
