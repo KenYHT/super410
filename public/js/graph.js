@@ -11,13 +11,15 @@ var svg = d3.select("body").append("svg")
   .attr("height", height)
   .append("g")
   .call(d3.behavior.zoom().scaleExtent([1, 8]).on("zoom", zoom))
-  .append("g");
+  .on("dblclick.zoom", null)
+  .append("g")
+  .on("dblclick.zoom", null);
 
 svg.append("rect")
-    .attr("class", "overlay")
-    .attr("width", width)
-    .attr("height", height)
-    .attr("opacity", 0.0);
+  .attr("class", "overlay")
+  .attr("width", width)
+  .attr("height", height)
+  .attr("opacity", 0.0);
 
 function zoom() {
   svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
@@ -29,7 +31,7 @@ var tip = d3.tip()
   .html(function (d) {
     return "<p><b>" + d.title + "</b></p><p>" + d.text + "</p>" + "<p>" + d.author_list + "</p>";
   });
-// TODO: add in the abstract^
+
 svg.call(tip);
 
 function drawGraph(graph) {
@@ -49,7 +51,7 @@ function drawGraph(graph) {
     .data(graph.nodes)
     .enter().append("circle")
     .attr("class", "node")
-    .attr("r", 6)
+    .attr("r", 7)
     .style("fill", function (d) {
       return d3.rgb("#add8e6");
     })
@@ -86,13 +88,15 @@ function drawGraph(graph) {
       });
   });
 
-  node.on("dbclick", function (d) {
-    window.open('http://arxiv.org/abs/hep-th/' + d.id, '_blank').focus();
-  });
-
   node.on("click", function (d) {
     // TODO: change color of edges based on citing in/citing out
     // TODO: add other vertices/edges to the graph that cited it/were cited by it
+    if (d.canOpenPage) {
+      window.open('http://arxiv.org/abs/hep-th/' + d.id, '_blank');
+      d.canOpenPage = false;
+    } else {
+      d.canOpenPage = true;
+    }
     svg.selectAll(".node").style('fill', function (curr) {
       return getColorFromSimilarity(d, curr);
     });
