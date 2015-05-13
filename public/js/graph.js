@@ -13,7 +13,13 @@ var svg = d3.select("body").append("svg")
   .call(d3.behavior.zoom().scaleExtent([1, 8]).on("zoom", zoom))
   .append("g");
 
-function zoom() { // TODO: make panning and zooming work when mouse is over any area, not just node/whatnot
+svg.append("rect")
+    .attr("class", "overlay")
+    .attr("width", width)
+    .attr("height", height)
+    .attr("opacity", 0.0);
+
+function zoom() {
   svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
 }
 
