@@ -27,11 +27,13 @@ client.ping({
 });
 
 exports.query = function(req, res) {
+  graphJSON = {};
 	var query = req.body.query;
 	client.search(query)
 			.then(function(body) {
 				var results = body.hits.hits;
 	 			for (var i = 0; i < results.length; i++) {
+          results[i]["fromQuery"] = true;
 	 				graphJSON["nodes"].push(results[i]);
 	 				var currResultIndex = graphJSON["nodes"].length;
 	 				// construct incoming edges and nodes
@@ -51,33 +53,9 @@ exports.query = function(req, res) {
             res.status(200).json({ message: "OK.", data: graphJSON });
           }
         });
-
-	 			// write to json file
-	 			// setTimeout(function() {
-	 			// 	fs.writeFile('./public/query.json', JSON.stringify(graphJSON, null, 4), function(error) {
-	 			// 		if (error) {
-	 			// 			res.status(500).json({ message: "Error.", data: error });
-	 			// 		} else {
-     //          console.log("wrote to file")
-	 			// 			res.status(200).json({ message: "OK.", data: {} });
-	 			// 		}
-	 			// 	})
-	 			// }, 1);
 	 		});
 	 			
 }
-
-// exports.saveJSON = function(req, res) {
-// 	fs.writeFile('./public/query.json', JSON.stringify(req.body, null, 4), 
-// 			function(err) {
-// 				if (err) {
-// 					res.status(500).json({ message: "Error.", data: error });
-// 				} else {
-// 					console.log("wrote to JSON file");
-// 					res.status(200).json({ message: "OK.", data: {} });
-// 				}
-// 			});
-// }
 
 function bulkCitations(citations, direction, currResultIndex) {
 		var bulkUrl = clusterUrl + '/phys/doc/_mget';
@@ -90,15 +68,16 @@ function bulkCitations(citations, direction, currResultIndex) {
 		};
 
     clusterRequests.push(function(cb) {
-        request(options, function(err, res, body) {
-          constructEdges(body.docs, direction, currResultIndex);
-          cb();
-        });
+      request(options, function(err, res, body) {
+        constructEdges(body.docs, direction, currResultIndex);
+        cb();
+      });
     });
 }
 
 function constructEdges(bulkResults, direction, currResultIndex) {
 	for (var i = 0; i < bulkResults.length; i++) {
+    bulkResults[i]["fromQuery"] = false;
 		graphJSON["nodes"].push(bulkResults[i]);
 
 		var link = {};
