@@ -29,6 +29,11 @@
         <div id="additional-inputs">
           <div class="row">
             <div class="small-6 columns">
+              <label>Document Limit:
+                <input id="document-limit" type="text" value="{{ searchForm.limit }}" ng-model="searchForm.limit"/>
+              </label>
+            </div>
+            <div class="small-6 columns">
               <label>Classifier:
                 <select ng-model="searchForm.classifier" ng-init="searchForm.classifier='text'">
                   <option value="text">Text</option>

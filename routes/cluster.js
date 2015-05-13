@@ -27,7 +27,7 @@ client.ping({
 });
 
 exports.query = function(req, res) {
-	var query = req.body.query;
+	var query = req.body;
   graphJSON = { "nodes": [], "links": [] };
   clusterRequests = [];
 	client.search(query)
@@ -47,28 +47,6 @@ exports.query = function(req, res) {
 	 			}
 
         async.parallel(clusterRequests, function(err, results) {
-          // for (var i = 0; i < (graphJSON.nodes.length - 1) / 2; i++) {
-          //   for (var j = i + 1; j < (graphJSON.nodes.length / 2); j++) {
-          //     var addEdge = Math.random() < 0.02;
-          //     if (addEdge) {
-          //       // console.log("constructing fake edge now")
-          //       var incoming = Math.random() < 0.5;
-          //       var link = {};
-          //       if (incoming) {
-          //         link["source"] = i;
-          //         link["target"] = j;
-          //       } else {
-          //         link["source"] = j;
-          //         link["target"] = i;
-          //       }
-
-          //       link.weight = 1;
-
-          //       graphJSON.links.push(link);
-          //     }
-          //   }
-          // }
-
           if (err) {
             res.status(500).json({ message: "Error.", data: err });
           } else {
