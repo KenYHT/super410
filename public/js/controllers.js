@@ -30,6 +30,7 @@ papertrail.controller('SearchController', ['$scope', '$http', '$location', funct
 		$http.post('/api/query', queryObject)
 		 		.success(function(res) {
           graph = extractGraph(res.data)
+          console.log(res);
           drawGraph(graph);
 		 		})
 		 		.error(function(err) {
