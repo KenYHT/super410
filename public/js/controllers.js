@@ -19,7 +19,7 @@ papertrail.controller('SearchController', ['$scope', '$http', '$location', funct
 		} else {
 			$scope.formToggleLink = "more options"
 		}
-		
+
 		$scope.showFullForm = !$scope.showFullForm;
 	};
 
@@ -29,30 +29,61 @@ papertrail.controller('SearchController', ['$scope', '$http', '$location', funct
 		var queryObject = constructQuery($scope.searchForm);
 		$http.post('/api/query', queryObject)
 		 		.success(function(res) {
-		 			console.log(res);
+          graph = extractGraph(res.data)
+          drawGraph(graph);
 		 		})
 		 		.error(function(err) {
 		 			console.log(err);
 		 		});
 	};
 
+  function extractGraph(data) {
+    var rawNodes = data.nodes;
+    var rawLinks = data.links;
+
+    var nodes = extractNodes(rawNodes);
+    var links = extractLinks(rawLinks, nodes);
+    return {
+      "nodes": nodes,
+      "links": links
+    }
+  }
+
+  function extractLinks(rawLinks, nodes) {
+    rawLinks.forEach(function (entry) {
+      entry.weight = 1;
+    });
+
+    rawLinks = rawLinks.filter(function (entry) {
+      return (entry && entry.target && entry.target < nodes.length && entry.source && entry.source < nodes.length);
+    });
+
+    return rawLinks;
+  }
+
+  function extractNodes(rawNodes) {
+    var cleaned = [];
+    rawNodes.forEach(function (entry) {
+      var tmp = entry._source;
+      tmp.id = entry._id;
+      tmp.weight = 1;
+      cleaned.push(tmp);
+    })
+    return cleaned;
+  }
+
 	function constructQuery(queryForm) {
         //guessing queryForm is the query they want
-        //and we make a object in the format for the 
+        //and we make a object in the format for the
         //btw this only does bm25 queries
         var constructedQuery = {
-          "index": "phys",
-          "type": "doc",
-          "body": {
             "query" : {
                 "match" : {
                     //queryForm.classifier: queryForm.query
                     "body_bm25": queryForm.query
                 }
             }
-          }
         };
-
         return constructedQuery
 	}
 }]);
