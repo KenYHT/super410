@@ -29,7 +29,7 @@ papertrail.controller('SearchController', ['$scope', '$http', '$location', funct
 		var queryObject = constructQuery($scope.searchForm);
 		$http.post('/api/query', queryObject)
 		 		.success(function(res) {
-		 			console.log(res);
+		 			// console.log(res);
 		 		})
 		 		.error(function(err) {
 		 			console.log(err);
@@ -48,6 +48,8 @@ papertrail.controller('SearchController', ['$scope', '$http', '$location', funct
                 }
             }
         };
+
+        console.log(constructedQuery);
         return constructedQuery
 	}
 }]);
