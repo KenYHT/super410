@@ -61,6 +61,7 @@ function drawGraph(graph) {
     .attr("markerHeight", 14)
     .attr("orient", "auto")
     .append("path")
+    .style("fill", "red")
     .attr("d", "M 0,0 V 4 L6,2 Z"); //this is actual shape for arrowhead
 
   force.on("tick", function () {
