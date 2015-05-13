@@ -45,6 +45,25 @@ exports.query = function(req, res) {
 	 			}
 
         async.parallel(clusterRequests, function(err, results) {
+          for (var i = 0; i < graphJSON.nodes.length; i++) {
+            for (var j = i; i < graphJSON.nodes.length; j++) {
+              var addEdge = Math.random() < 0.2;
+              if (addEdge) {
+                var incoming = Math.random() < 0.5;
+                var link = {};
+                if (incoming) {
+                  link["source"] = i.toString();
+                  link["target"] = j.toString();
+                } else {
+                  link["source"] = j.toString();
+                  link["target"] = i.toString();
+                }
+
+                graphJSON.links.push(link);
+              }
+            }
+          }
+
           if (err) {
             res.status(500).json({ message: "Error.", data: err });
           } else {
