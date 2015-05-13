@@ -13,7 +13,7 @@ var svg = d3.select("body").append("svg")
   .call(d3.behavior.zoom().scaleExtent([1, 8]).on("zoom", zoom))
   .append("g");
 
-function zoom() {
+function zoom() { // TODO: make panning and zooming work when mouse is over any area, not just node/whatnot
   svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
 }
 
@@ -21,9 +21,9 @@ var tip = d3.tip()
   .attr('class', 'd3-tip')
   .offset([-10, 0])
   .html(function (d) {
-    return '<p><b>' + d.title + '</b></p>' + '<p>' + d.author_list + '</p>'; // TODO: add in the abstract
+    return '<p><b>' + d.title + '</b></p>' + '<p>' + d.author_list + '</p>';
   });
-
+// TODO: add in the abstract^
 svg.call(tip);
 
 function drawGraph(graph) {
