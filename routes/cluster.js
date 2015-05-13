@@ -27,9 +27,11 @@ client.ping({
 });
 
 exports.query = function(req, res) {
-  graphJSON = {};
-	var query = req.body.query;
-	client.search(query)
+  graphJSON = { "nodes": [], "links": [] };
+  clusterRequests = [];
+	var query = req.body;
+
+  client.search(query)
 			.then(function(body) {
 				var results = body.hits.hits;
 	 			for (var i = 0; i < results.length; i++) {
@@ -54,7 +56,6 @@ exports.query = function(req, res) {
           }
         });
 	 		});
-	 			
 }
 
 function bulkCitations(citations, direction, currResultIndex) {

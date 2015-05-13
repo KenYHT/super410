@@ -29,7 +29,7 @@ papertrail.controller('SearchController', ['$scope', '$http', '$location', funct
 		var queryObject = constructQuery($scope.searchForm);
 		$http.post('/api/query', queryObject)
 		 		.success(function(res) {
-		 			// console.log(res);
+		 			console.log(res);
 		 		})
 		 		.error(function(err) {
 		 			console.log(err);
@@ -41,15 +41,18 @@ papertrail.controller('SearchController', ['$scope', '$http', '$location', funct
         //and we make a object in the format for the 
         //btw this only does bm25 queries
         var constructedQuery = {
+          "index": "phys",
+          "type": "doc",
+          "body": {
             "query" : {
                 "match" : {
                     //queryForm.classifier: queryForm.query
                     "body_bm25": queryForm.query
                 }
             }
+          }
         };
 
-        console.log(constructedQuery);
         return constructedQuery
 	}
 }]);
