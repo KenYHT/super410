@@ -8,15 +8,28 @@ var force = d3.layout.force()
 
 var svg = d3.select("body").append("svg")
   .attr("width", width)
-  .attr("height", height);
+  .attr("height", height)
+  .append("g")
+  .call(d3.behavior.zoom().scaleExtent([1, 8]).on("zoom", zoom))
+  .append("g");
 
-var tip = d3.tip() // todo: uhhhhhh?
+svg.append("rect")
+    .attr("class", "overlay")
+    .attr("width", width)
+    .attr("height", height)
+    .attr("opacity", 0.0);
+
+function zoom() {
+  svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+}
+
+var tip = d3.tip()
   .attr('class', 'd3-tip')
   .offset([-10, 0])
   .html(function (d) {
     return '<p><b>' + d.title + '</b></p>' + '<p>' + d.author_list + '</p>';
   });
-
+// TODO: add in the abstract^
 svg.call(tip);
 
 function drawGraph(graph) {
@@ -80,7 +93,7 @@ function drawGraph(graph) {
     // TODO: change color of edges based on citing in/citing out
     // TODO: add other vertices/edges to the graph that cited it/were cited by it
     svg.selectAll(".node").style('fill', function (curr) {
-        return getColorFromSimilarity(d, curr);
+      return getColorFromSimilarity(d, curr);
     });
   });
 
@@ -92,5 +105,5 @@ function getColorFromSimilarity(source, target) {
   var titleSimilarity = compare(source.title, target.title);
   var abstractSimilarity = compare(source.text, target.text);
   var similarity = (titleSimilarity + abstractSimilarity) / 2.0;
-  return d3.hsl(120*similarity, 1, 0.5);
+  return d3.hsl(120 * similarity, 1, 0.5);
 }
