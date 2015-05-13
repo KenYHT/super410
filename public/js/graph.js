@@ -1,8 +1,8 @@
-var width = 960,
-  height = 500;
+var width = window.innerWidth,
+  height = window.innerHeight;
 
 var force = d3.layout.force()
-  .charge(-200)
+  .charge(-300)
   .linkDistance(100)
   .size([width, height]);
 
