@@ -20,11 +20,6 @@ h1, #title-desc {
   margin-top: 39px;
 }
 
-.node {
-  stroke: #fff;
-  stroke-width: 1.5px;
-}
-
 .link {
   stroke: #999;
   stroke-opacity: .6;
@@ -32,7 +27,6 @@ h1, #title-desc {
 
 .d3-tip {
   line-height: 1;
-  font-weight: bold;
   padding: 12px;
   background: rgba(0, 0, 0, 0.8);
   color: #fff;

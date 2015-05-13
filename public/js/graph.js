@@ -2,6 +2,7 @@ var width = window.innerWidth;
 var height = window.innerHeight;
 var force = d3.layout.force()
   .charge(-300)
+  .friction(0.1)
   .linkDistance(100)
   .size([width, height]);
 
@@ -13,7 +14,7 @@ var tip = d3.tip() // todo: uhhhhhh?
   .attr('class', 'd3-tip')
   .offset([-10, 0])
   .html(function (d) {
-    return "abstract and title goes here";
+    return '<p><b>' + d.title + '</b></p>' + '<p>' + d.author_list + '</p>';
   });
 
 svg.call(tip);
@@ -35,7 +36,7 @@ function drawGraph(graph) {
     .data(graph.nodes)
     .enter().append("circle")
     .attr("class", "node")
-    .attr("r", 5)
+    .attr("r", 6)
     .style("fill", function (d) {
       return d3.rgb("#add8e6");
     })
@@ -71,8 +72,25 @@ function drawGraph(graph) {
       });
   });
 
-  node.on("click", function (d) {
-    console.log(d.name);
-    // TODO: change the color of other vertices based on similarity
+  node.on("dbclick", function (d) {
+    window.open('http://arxiv.org/abs/hep-th/' + d.id, '_blank').focus();
   });
+
+  node.on("click", function (d) {
+    // TODO: change color of edges based on citing in/citing out
+    // TODO: add other vertices/edges to the graph that cited it/were cited by it
+    svg.selectAll(".node").style('fill', function (curr) {
+        return getColorFromSimilarity(d, curr);
+    });
+  });
+
+  node.on("mouseover", tip.show);
+  node.on("mouseout", tip.hide);
+}
+
+function getColorFromSimilarity(source, target) {
+  var titleSimilarity = compare(source.title, target.title);
+  var abstractSimilarity = compare(source.text, target.text);
+  var similarity = (titleSimilarity + abstractSimilarity) / 2.0;
+  return d3.hsl(120*similarity, 1, 0.5);
 }
