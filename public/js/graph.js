@@ -1,7 +1,7 @@
 var width = window.innerWidth;
 var height = window.innerHeight;
 var force = d3.layout.force()
-  .charge(-300)
+  .charge(-800)
   .friction(0.1)
   .linkDistance(100)
   .size([width, height]);
@@ -27,7 +27,7 @@ var tip = d3.tip()
   .attr('class', 'd3-tip')
   .offset([-10, 0])
   .html(function (d) {
-    return '<p><b>' + d.title + '</b></p>' + '<p>' + d.author_list + '</p>';
+    return "<p><b>" + d.title + "</b></p><p>" + d.text + "</p>" + "<p>" + d.author_list + "</p>";
   });
 // TODO: add in the abstract^
 svg.call(tip);

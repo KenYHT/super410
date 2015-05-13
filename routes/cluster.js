@@ -47,28 +47,27 @@ exports.query = function(req, res) {
 	 			}
 
         async.parallel(clusterRequests, function(err, results) {
-          console.log("constructing fake edges")
-          for (var i = 0; i < (graphJSON.nodes.length - 1) / 2; i++) {
-            for (var j = i + 1; j < (graphJSON.nodes.length / 2); j++) {
-              var addEdge = Math.random() < 0.02;
-              if (addEdge) {
-                // console.log("constructing fake edge now")
-                var incoming = Math.random() < 0.5;
-                var link = {};
-                if (incoming) {
-                  link["source"] = i;
-                  link["target"] = j;
-                } else {
-                  link["source"] = j;
-                  link["target"] = i;
-                }
+          // for (var i = 0; i < (graphJSON.nodes.length - 1) / 2; i++) {
+          //   for (var j = i + 1; j < (graphJSON.nodes.length / 2); j++) {
+          //     var addEdge = Math.random() < 0.02;
+          //     if (addEdge) {
+          //       // console.log("constructing fake edge now")
+          //       var incoming = Math.random() < 0.5;
+          //       var link = {};
+          //       if (incoming) {
+          //         link["source"] = i;
+          //         link["target"] = j;
+          //       } else {
+          //         link["source"] = j;
+          //         link["target"] = i;
+          //       }
 
-                link.weight = 1;
+          //       link.weight = 1;
 
-                graphJSON.links.push(link);
-              }
-            }
-          }
+          //       graphJSON.links.push(link);
+          //     }
+          //   }
+          // }
 
           if (err) {
             res.status(500).json({ message: "Error.", data: err });
@@ -76,33 +75,9 @@ exports.query = function(req, res) {
             res.status(200).json({ message: "OK.", data: graphJSON });
           }
         });
-
-	 			// write to json file
-	 			// setTimeout(function() {
-	 			// 	fs.writeFile('./public/query.json', JSON.stringify(graphJSON, null, 4), function(error) {
-	 			// 		if (error) {
-	 			// 			res.status(500).json({ message: "Error.", data: error });
-	 			// 		} else {
-     //          console.log("wrote to file")
-	 			// 			res.status(200).json({ message: "OK.", data: {} });
-	 			// 		}
-	 			// 	})
-	 			// }, 1);
 	 		});
 	 			
 }
-
-// exports.saveJSON = function(req, res) {
-// 	fs.writeFile('./public/query.json', JSON.stringify(req.body, null, 4), 
-// 			function(err) {
-// 				if (err) {
-// 					res.status(500).json({ message: "Error.", data: error });
-// 				} else {
-// 					console.log("wrote to JSON file");
-// 					res.status(200).json({ message: "OK.", data: {} });
-// 				}
-// 			});
-// }
 
 function bulkCitations(citations, direction, currResultIndex) {
 		var bulkUrl = clusterUrl + '/phys/doc/_mget';
@@ -124,18 +99,32 @@ function bulkCitations(citations, direction, currResultIndex) {
 
 function constructEdges(bulkResults, direction, currResultIndex) {
 	for (var i = 0; i < bulkResults.length; i++) {
-		graphJSON["nodes"].push(bulkResults[i]);
+    var occurenceList = graphJSON.nodes.map(function(node) {
+      return node._id === bulkResults[i]._id;
+    });
 
-		var link = {};
+    var existingNodeIndex = occurenceList.indexOf(true);
+    var link = {};
 
-		if (direction === "incoming") {
-			link["source"] = graphJSON["nodes"].length;
-			link["target"] = currResultIndex;
-		} else {
-			link["source"] = currResultIndex;
-			link["target"] = graphJSON["nodes"].length;
-		}
-
+    if (existingNodeIndex === -1) {
+		  graphJSON["nodes"].push(bulkResults[i]);
+      if (direction === "incoming") {
+        link.source = graphJSON["nodes"].length;
+        link.target = currResultIndex;
+      } else {
+        link.source = currResultIndex;
+        link.target = graphJSON["nodes"].length;
+      }
+    } else {
+      if (direction === "incoming") {
+        link.source = existingNodeIndex;
+        link.target = currResultIndex;
+      } else {
+        link.source = currResultIndex;
+        link.target = existingNodeIndex;
+      }
+    }
+		
 		graphJSON["links"].push(link);
 	}
 }
