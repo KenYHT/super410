@@ -57,7 +57,7 @@ papertrail.controller('SearchController', ['$scope', '$http', '$location', funct
     rawLinks = rawLinks.filter(function (entry) {
       return (entry && entry.target && entry.target < nodes.length && entry.source && entry.source < nodes.length);
     });
-    console.log('rawlinks', rawLinks);
+
     return rawLinks;
   }
 

@@ -1,25 +1,24 @@
+var width = window.innerWidth;
+var height = window.innerHeight;
+var force = d3.layout.force()
+  .charge(-300)
+  .linkDistance(100)
+  .size([width, height]);
+
+var svg = d3.select("body").append("svg")
+  .attr("width", width)
+  .attr("height", height);
+
+var tip = d3.tip() // todo: uhhhhhh?
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function (d) {
+    return "abstract and title goes here";
+  });
+
+svg.call(tip);
+
 function drawGraph(graph) {
-  console.log (graph);
-  var width = window.innerWidth;
-  var height = window.innerHeight;
-  var force = d3.layout.force()
-    .charge(-300)
-    .linkDistance(100)
-    .size([width, height]);
-
-  var svg = d3.select("body").append("svg")
-    .attr("width", width)
-    .attr("height", height);
-
-  var tip = d3.tip() // todo: uhhhhhh?
-    .attr('class', 'd3-tip')
-    .offset([-10, 0])
-    .html(function (d) {
-      return "abstract and title goes here";
-    });
-
-  svg.call(tip);
-
   force
     .nodes(graph.nodes)
     .links(graph.links)
