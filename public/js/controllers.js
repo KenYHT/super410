@@ -7,7 +7,7 @@ papertrail.controller('SearchController', ['$scope', '$http', '$location', funct
   $scope.searchForm = {
     query: "",
     classifier: "text",
-    limit: 50
+    limit: 10
   };
 
 	// also constructs the graph
@@ -66,6 +66,8 @@ papertrail.controller('SearchController', ['$scope', '$http', '$location', funct
     switch (searchForm.classifier) {
       case "bm25": 
         constructedQuery = {
+          "from": 0,
+          "size": parseInt(searchForm.limit),
           "query": {
             "match": {
               "body_bm25": searchForm.query
@@ -76,6 +78,8 @@ papertrail.controller('SearchController', ['$scope', '$http', '$location', funct
 
       case "lmd":
         constructedQuery = {
+          "from": 0,
+          "size": parseInt(searchForm.limit),
           "query": {
             "match": {
               "body_lmd": searchForm.query
@@ -86,6 +90,8 @@ papertrail.controller('SearchController', ['$scope', '$http', '$location', funct
 
       default:
         constructedQuery = {
+          "from": 0,
+          "size": parseInt(searchForm.limit),
           "query": {
             "match": {
               "text": searchForm.query
@@ -93,7 +99,7 @@ papertrail.controller('SearchController', ['$scope', '$http', '$location', funct
           }
         }
     }
-    
+
     return constructedQuery;
   }
 }]);
