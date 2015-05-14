@@ -1,3 +1,6 @@
+// TODO: change color of edges based on citing in/citing out
+// TODO: add other vertices/edges to the graph that cited it/were cited by it
+
 var width = window.innerWidth;
 var height = window.innerHeight;
 var force = d3.layout.force()
@@ -35,6 +38,8 @@ var tip = d3.tip()
 svg.call(tip);
 
 function drawGraph(graph) {
+  svg.selectAll('*').remove();
+
   force
     .nodes(graph.nodes)
     .links(graph.links)
@@ -89,8 +94,6 @@ function drawGraph(graph) {
   });
 
   node.on("click", function (d) {
-    // TODO: change color of edges based on citing in/citing out
-    // TODO: add other vertices/edges to the graph that cited it/were cited by it
     if (d.canOpenPage) {
       window.open('http://arxiv.org/abs/hep-th/' + d.id, '_blank');
       d.canOpenPage = false;
