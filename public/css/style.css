@@ -15,7 +15,7 @@ a {
 }
 
 .d3-tip p {
-  font-size: 10px;
+  font-size: 11px;
 }
 
 h1, #title-desc {
@@ -33,8 +33,7 @@ h1, #title-desc {
 }
 
 .link {
-  stroke: #999;
-  stroke-opacity: .6;
+  stroke: LightGray
 }
 
 .d3-tip {

@@ -1,5 +1,4 @@
 // TODO: change color of edges based on citing in/citing out
-// TODO: add other vertices/edges to the graph that cited it/were cited by it
 
 var width = window.innerWidth;
 var height = window.innerHeight;
@@ -66,10 +65,12 @@ function drawGraph(graph) {
     .attr("id", "arrowhead")
     .attr("markerWidth", 6)
     .attr("markerHeight", 14)
+    .attr('refX', 0)
+    .attr('refY', 0)
     .attr("orient", "auto")
     .append("path")
-    .style("fill", "red")
-    .attr("d", "M 0,0 V 4 L6,2 Z"); //this is actual shape for arrowhead
+    .style("fill", "LightGray")
+    .attr("d", "M 0,0 V 4 L6,2 Z");
 
   force.on("tick", function () {
     link.attr("x1", function (d) {
@@ -102,6 +103,14 @@ function drawGraph(graph) {
     }
     svg.selectAll(".node").style('fill', function (curr) {
       return getColorFromSimilarity(d, curr);
+    });
+
+    link.style('stroke', function (l) {
+      if (d === l.source) {
+        return "Red";
+      } else if (d === l.target) {
+        return "Blue";
+      }
     });
   });
 
