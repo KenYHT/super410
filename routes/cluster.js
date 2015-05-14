@@ -30,30 +30,40 @@ exports.query = function(req, res) {
 	var query = req.body;
   graphJSON = { "nodes": [], "links": [] };
   clusterRequests = [];
-	client.search(query)
-			.then(function(body) {
-				var results = body.hits.hits;
-	 			for (var i = 0; i < results.length; i++) {
-	 				graphJSON["nodes"].push(results[i]);
-	 				var currResultIndex = graphJSON["nodes"].length;
-	 				// construct incoming edges and nodes
-	 				if (results[i]._source.cite_in.length > 0) {
-	 					bulkCitations(results[i]._source.cite_in, "incoming", currResultIndex);
-	 				}
-	 				// construct outgoing edges and nodes
-	 				if (results[i]._source.cite_out.length > 0) {
-	 					bulkCitations(results[i]._source.cite_out, "outgoing", currResultIndex);
-	 				}
-	 			}
+	
+  var queryUrl = clusterUrl + '/phys/doc/_search?from=0&size=' + req.body.size;
+  var options = {
+    method: 'post',
+    body: req.body.query,
+    json: true,
+    url: queryUrl,
+  };
 
-        async.parallel(clusterRequests, function(err, results) {
-          if (err) {
-            res.status(500).json({ message: "Error.", data: err });
-          } else {
-            res.status(200).json({ message: "OK.", data: graphJSON });
-          }
-        });
-	 		});
+  console.log(req.body.query)
+  request(options, function(err, httpResponse, body) {
+    console.log(body)
+    var results = body.hits.hits;
+      for (var i = 0; i < results.length; i++) {
+        graphJSON["nodes"].push(results[i]);
+        var currResultIndex = graphJSON["nodes"].length;
+        // construct incoming edges and nodes
+        if (results[i]._source.cite_in.length > 0) {
+          bulkCitations(results[i]._source.cite_in, "incoming", currResultIndex);
+        }
+        // construct outgoing edges and nodes
+        if (results[i]._source.cite_out.length > 0) {
+          bulkCitations(results[i]._source.cite_out, "outgoing", currResultIndex);
+        }
+      }
+
+      async.parallel(clusterRequests, function(err, results) {
+        if (err) {
+          res.status(500).json({ message: "Error.", data: err });
+        } else {
+          res.status(200).json({ message: "OK.", data: graphJSON });
+        }
+      });
+  });
 	 			
 }
 

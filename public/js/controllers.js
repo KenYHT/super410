@@ -62,15 +62,19 @@ papertrail.controller('SearchController', ['$scope', '$http', '$location', funct
 
   function constructQuery(searchForm) {
     var constructedQuery = {};
-
+    console.log(searchForm.classifier)
     switch (searchForm.classifier) {
-      case "bm25": 
+      case "bm_25": 
         constructedQuery = {
+          "index": "phys",
+          "type": "doc",
           "from": 0,
           "size": parseInt(searchForm.limit),
-          "query": {
-            "match": {
-              "body_bm25": searchForm.query
+          "query": {  
+            "query": {
+              "match": {
+                "body_bm25": searchForm.query
+              }
             }
           }
         };
@@ -78,11 +82,15 @@ papertrail.controller('SearchController', ['$scope', '$http', '$location', funct
 
       case "lmd":
         constructedQuery = {
+          "index": "phys",
+          "type": "doc",
           "from": 0,
           "size": parseInt(searchForm.limit),
           "query": {
-            "match": {
-              "body_lmd": searchForm.query
+            "query": {
+              "match": {
+                "body_lmd": searchForm.query
+              }
             }
           }
         }
@@ -90,11 +98,15 @@ papertrail.controller('SearchController', ['$scope', '$http', '$location', funct
 
       default:
         constructedQuery = {
+          "index": "phys",
+          "type": "doc",
           "from": 0,
           "size": parseInt(searchForm.limit),
           "query": {
-            "match": {
-              "text": searchForm.query
+            "query": {
+              "match": {
+                "text": searchForm.query
+              }
             }
           }
         }
